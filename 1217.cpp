@@ -2,14 +2,16 @@
 #include <string>
 #include <vector>
 #include <iomanip>
+#include <map>
 
 using namespace std;
 
-int main(){
+int main() {
     int testes;
     double preco, total = 0, kg, qtdFrutas;
     string frutas, aux;
     vector<string> fruta;
+    map<int, int> frutaPerDay;
 
     cin >> testes;
 
@@ -30,22 +32,20 @@ int main(){
             }
         }
 
+        cout << "day " << i+1 << ": " << fruta.size() << " kg" << endl;
+
+        frutaPerDay[i] = fruta.size();
+        fruta.clear();
     }
 
-    qtdFrutas = frutas.size();
-
-    cout << qtdFrutas << endl;
+    for(auto f : frutaPerDay){
+        qtdFrutas += f.second;
+    }
 
     kg = qtdFrutas / testes;
 
-    cout << kg << " kg by day" << endl;
-    cout << "R$ " << total / testes << " by day" << endl;
-
-    // for(auto f : fruta){
-    //     cout << f << endl;
-    // }
-
-    
+    cout << fixed << setprecision(2) << kg << " kg by day" << endl;
+    cout << "R$ " << fixed << setprecision(2) << total / testes << " by day" << endl;
 
     return 0;
 }
